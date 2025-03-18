@@ -4,9 +4,12 @@ pipeline {
     stages {
         stage('Clonar Repositorio') {
             steps {
-                script {
-                    git branch : 'main', git 'https://github.com/andreadeabd/calculadora'
-                }
+                // Usamos el bloque checkout con la opción de branch especificada
+                checkout scm: [
+                    $class: 'GitSCM',
+                    branches: [[name: 'refs/heads/main']],
+                    userRemoteConfigs: [[url: 'https://github.com/andreadeabd/calculadora.git']]
+                ]
             }
         }
         stage('Instalar Dependencias') {
