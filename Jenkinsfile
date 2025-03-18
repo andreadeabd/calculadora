@@ -6,7 +6,7 @@ pipeline {
             steps {
                 script {
                     // Clonamos el repositorio y nos aseguramos de estar en la rama main
-                    git 'https://github.com/tuusuario/calculadora_project.git'
+                    git 'https://github.com/andreadeabd/calculadora'
                     sh 'git checkout main'
                 }
             }
