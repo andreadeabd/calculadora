@@ -4,7 +4,6 @@ pipeline {
     stages {
         stage('Clonar Repositorio') {
             steps {
-                // Usamos el bloque checkout con la opción de branch especificada
                 checkout scm: [
                     $class: 'GitSCM',
                     branches: [[name: 'refs/heads/main']],
@@ -12,14 +11,28 @@ pipeline {
                 ]
             }
         }
-        stage('Instalar Dependencias') {
+        stage('Crear Entorno Virtual y Instalar Dependencias') {
             steps {
-                sh 'pip3 install -r requirements.txt'
+                script {
+                    // Crear un entorno virtual
+                    sh 'python3 -m venv venv'
+                    // Activar el entorno virtual y luego instalar las dependencias
+                    sh '''
+                        source venv/bin/activate
+                        pip install -r requirements.txt
+                    '''
+                }
             }
         }
         stage('Ejecutar Pruebas') {
             steps {
-                sh 'python3 -m unittest test_calculadora.py'
+                script {
+                    // Ejecutar pruebas en el entorno virtual
+                    sh '''
+                        source venv/bin/activate
+                        python3 -m unittest test_calculadora.py
+                    '''
+                }
             }
         }
     }
