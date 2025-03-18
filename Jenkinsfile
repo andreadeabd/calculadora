@@ -5,9 +5,7 @@ pipeline {
         stage('Clonar Repositorio') {
             steps {
                 script {
-                    // Clonamos el repositorio y nos aseguramos de estar en la rama main
-                    git 'https://github.com/andreadeabd/calculadora'
-                    sh 'git checkout main'
+                    git branch : 'main', git 'https://github.com/andreadeabd/calculadora'
                 }
             }
         }
