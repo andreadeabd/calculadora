@@ -44,6 +44,14 @@ pipeline {
                 }
             }
         }
+        stage('Fallo Intencional con Comando Erróneo') {
+            steps {
+                script {
+                    // Intentar ejecutar un comando que no existe
+                    sh 'non_existent_command' // Esto provocará un fallo
+                }
+            }
+        }
     }
 
     post {
