@@ -25,11 +25,11 @@ pipeline {
                     // Crear entorno virtual
                     sh 'python3 -m venv venv'
 
-                    // Activar el entorno virtual
-                    sh '. venv/bin/activate'
-
-                    // Instalar dependencias con pip
-                    sh 'pip install -r requirements.txt'
+                    // Activar el entorno virtual y instalar dependencias con pip
+                    sh '''
+                    . venv/bin/activate
+                    pip install -r requirements.txt
+                    '''
                 }
             }
         }
@@ -37,7 +37,10 @@ pipeline {
             steps {
                 script {
                     // Ejecutar pruebas dentro del entorno virtual
-                    sh '. venv/bin/activate && python3 -m unittest test_calculadora.py'
+                    sh '''
+                    . venv/bin/activate
+                    python3 -m unittest test_calculadora.py
+                    '''
                 }
             }
         }
