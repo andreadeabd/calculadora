@@ -4,7 +4,7 @@ pipeline {
     stages {
         stage('Clonar Repositorio') {
             steps {
-                git branch: 'main', url: 'https://github.com/andreadeabd/calculadora.git'
+                git branch: 'main', url: 'https://github.com/andreadeabd/calculadora'
             }
         }
         stage('Instalar Dependencias') {
