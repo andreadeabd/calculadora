@@ -22,14 +22,8 @@ pipeline {
         stage('Crear Entorno Virtual y Instalar Dependencias') {
             steps {
                 script {
-                    // Crear entorno virtual
-                    sh 'python3 -m venv venv'
-                    
-                    // Activar entorno virtual
-                    sh '. venv/bin/activate'
-                    
-                    // Instalar dependencias en el entorno virtual
-                    sh 'pip install -r requirements.txt'
+                    // Instalar dependencias con pipx
+                    sh 'pipx install -r requirements.txt'
                 }
             }
         }
